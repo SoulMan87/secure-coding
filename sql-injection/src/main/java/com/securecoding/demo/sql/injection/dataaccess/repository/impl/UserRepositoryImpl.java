@@ -1,7 +1,7 @@
-package com.securecoding.demo.sql.injection.dataacces.repository.impl;
+package com.securecoding.demo.sql.injection.dataaccess.repository.impl;
 
-import com.securecoding.demo.sql.injection.dataacces.entity.UserEntity;
-import com.securecoding.demo.sql.injection.dataacces.repository.CustomUserRepository;
+import com.securecoding.demo.sql.injection.dataaccess.entity.UserEntity;
+import com.securecoding.demo.sql.injection.dataaccess.repository.CustomUserRepository;
 import com.securecoding.demo.web.login.dataaccess.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,24 +17,23 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryImpl implements CustomUserRepository {
 
-    private static final Logger LOG = LoggerFactory.getLogger (UserRepositoryImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserRepositoryImpl.class);
 
     private static final String FIND_USER_BY_USERNAME_PASSWORD =
             "select id, username, password, name, surname " +
-            "from users u " +
-            "where u.username = '%s' " +
-            "and u.password = '%s'";
+                    "from users u " +
+                    "where u.username = '%s' " +
+                    "and u.password = '%s'";
 
     private static final String FIND_USER_BY_USERNAME =
             "select id, username, password, name, surname " +
-            "from users u " +
-            "where u.username = '%s'";
-
+                    "from users u " +
+                    "where u.username = '%s'";
 
     private static final String FIND_USER_BY_USERID =
             "select id, username, password, name, surname " +
-            "from users u " +
-            "where u.id = '%s'";
+                    "from users u " +
+                    "where u.id = %s";
 
     @PersistenceContext
     private EntityManager em;
@@ -51,7 +50,7 @@ public class UserRepositoryImpl implements CustomUserRepository {
     }
 
     @Override
-    public Optional<User> findUserByUseId(String userId) {
+    public Optional<User> findUserByUserId(String userId) {
         return queryDatabase(FIND_USER_BY_USERID, userId);
     }
 
@@ -65,13 +64,15 @@ public class UserRepositoryImpl implements CustomUserRepository {
         }
         return Optional.of(mapResultToUser(result.get(0)));
     }
+
     private User mapResultToUser(Object[] result) {
-        UserEntity user = new UserEntity ();
-        user.setId (new BigInteger (result[0].toString ()));
-        user.setUsername (result[1].toString ());
-        user.setPassword (result[2].toString ());
-        user.setName (result[3].toString ());
-        user.setSurname (result[4].toString ());
+        UserEntity user = new UserEntity();
+        user.setId(new BigInteger(result[0].toString()));
+        user.setUsername(result[1].toString());
+        user.setPassword(result[2].toString());
+        user.setName(result[3].toString());
+        user.setSurname(result[4].toString());
         return user;
     }
+
 }
