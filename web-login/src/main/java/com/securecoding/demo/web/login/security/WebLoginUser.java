@@ -13,15 +13,12 @@ import java.util.Collection;
 public class WebLoginUser implements UserDetails {
 
     private BigInteger userId;
-    private String userName;
+
+    private String username;
+
     private String password;
+
     private Collection<? extends GrantedAuthority> authorities;
-
-
-    @Override
-    public String getUsername() {
-        return "";
-    }
 
     @Override
     public boolean isAccountNonExpired() {

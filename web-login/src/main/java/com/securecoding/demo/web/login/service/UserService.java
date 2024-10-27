@@ -6,7 +6,11 @@ import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> findUserByUsernameAndPassword(String name, String password);
+    Optional<User> findUserByUsernameAndPassword(String username, String password);
 
     Optional<User> getUserInfo(String userId);
+
+    default Optional<User> getUserInfoByUsername(String username) {
+        return Optional.empty();
+    }
 }

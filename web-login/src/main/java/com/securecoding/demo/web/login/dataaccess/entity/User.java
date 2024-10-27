@@ -23,6 +23,4 @@ public interface User {
     String getSurname();
 
     void setSurname(String surname);
-
-
 }

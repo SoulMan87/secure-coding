@@ -13,7 +13,7 @@ public class WebLoginAuthenticationEntryPoint implements AuthenticationEntryPoin
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        httpServletResponse.setStatus (HttpServletResponse.SC_UNAUTHORIZED);
-        httpServletResponse.sendRedirect ("/error");
+        httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        httpServletResponse.sendRedirect("/error");
     }
 }

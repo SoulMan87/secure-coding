@@ -19,7 +19,7 @@ public class UserRepositoryImpl implements CustomUserRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger (UserRepositoryImpl.class);
 
-    private static final String FIND_USER_BY_USERNAME_AND_PASSWORD =
+    private static final String FIND_USER_BY_USERNAME_PASSWORD =
             "select id, username, password, name, surname " +
             "from users u " +
             "where u.username = '%s' " +
@@ -37,39 +37,34 @@ public class UserRepositoryImpl implements CustomUserRepository {
             "where u.id = '%s'";
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager em;
+
 
     @Override
     public Optional<User> findUserByUsernameAndPassword(String username, String password) {
-        var query = entityManager.createNativeQuery (FIND_USER_BY_USERNAME_AND_PASSWORD);
-        query.setParameter ("username", username);
-        query.setParameter ("password", password);
-        return getUserFromQuery (query);
+        return queryDatabase(FIND_USER_BY_USERNAME_PASSWORD, username, password);
     }
 
     @Override
     public Optional<User> findUserByUsername(String username) {
-        var query = entityManager.createNativeQuery (FIND_USER_BY_USERNAME);
-        query.setParameter ("username", username);
-        return getUserFromQuery (query);
+        return queryDatabase(FIND_USER_BY_USERNAME, username);
     }
 
     @Override
     public Optional<User> findUserByUseId(String userId) {
-        var query = entityManager.createNativeQuery (FIND_USER_BY_USERID);
-        query.setParameter ("userId", userId);
-        return getUserFromQuery (query);
+        return queryDatabase(FIND_USER_BY_USERID, userId);
     }
 
-    private Optional<User> getUserFromQuery(Query query) {
-        List<Object[]> result = query.getResultList ();
-        if (result == null || result.isEmpty ()) {
-            return Optional.empty ();
+    private Optional<User> queryDatabase(String query, Object... params) {
+        String formattedQuery = String.format(query, params);
+        Query nativeQuery = this.em.createNativeQuery(formattedQuery);
+        LOG.debug("Querying user with {}", formattedQuery);
+        List<Object[]> result = nativeQuery.getResultList();
+        if (result == null || result.size() == 0) {
+            return Optional.empty();
         }
-        LOG.debug ("User found with {}", query);
-        return Optional.of (mapResultToUser (result.get (0)));
+        return Optional.of(mapResultToUser(result.get(0)));
     }
-
     private User mapResultToUser(Object[] result) {
         UserEntity user = new UserEntity ();
         user.setId (new BigInteger (result[0].toString ()));
