@@ -12,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WebLoginRequestModel {
+
     @NotEmpty
     private String username;
     @NotEmpty

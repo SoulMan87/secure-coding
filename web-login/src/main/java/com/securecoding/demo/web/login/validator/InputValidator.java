@@ -7,4 +7,5 @@ public interface InputValidator {
     void isValidPassword(String password);
 
     void isValidUserId(String userId);
+
 }

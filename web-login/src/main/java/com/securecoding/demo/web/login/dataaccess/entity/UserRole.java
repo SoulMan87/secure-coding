@@ -8,6 +8,8 @@ public interface UserRole {
 
     void setId(BigInteger id);
 
+    BigInteger getUserId();
+
     void setUserId(BigInteger userId);
 
     String getRole();

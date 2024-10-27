@@ -8,30 +8,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class SqlInputValidator implements InputValidator {
 
-    private static final Logger LOG = LoggerFactory.getLogger (SqlInputValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SqlInputValidator.class);
 
     @Override
     public void isValidUsername(String username) {
-        if (username == null || username.isEmpty ()) {
-            LOG.info ("Username is not valid!");
-            throw new IllegalArgumentException ("Username is not valid!");
+        if (username == null || "".equals(username)) {
+            LOG.info("Username is not valid!");
+            throw new IllegalArgumentException("Username is not valid!");
         }
     }
 
     @Override
     public void isValidPassword(String password) {
-        if (password == null || password.isEmpty ()) {
-            LOG.info ("Password is not valid!");
-            throw new IllegalArgumentException ("Password is not valid!");
+        if (password == null || "".equals(password)) {
+            LOG.info("Password is not valid!");
+            throw new IllegalArgumentException("Password is not valid!");
         }
     }
 
     @Override
     public void isValidUserId(String userId) {
-        if (userId == null || userId.isEmpty ()) {
-            LOG.info ("User id is not valid!");
-            throw new IllegalArgumentException ("User id is not valid!");
+        if (userId == null || "".equals(userId)) {
+            LOG.info("User id is not valid!");
+            throw new IllegalArgumentException("User id is not valid!");
         }
-
     }
+
+
 }

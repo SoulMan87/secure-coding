@@ -11,6 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class SqlInjectionApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run (SqlInjectionApplication.class, args);
+        SpringApplication.run(SqlInjectionApplication.class, args);
     }
 }

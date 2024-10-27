@@ -2,7 +2,7 @@
 
 <div class="container float-left">
     <div th:if="${user != null}">
-        <h4>User info</h4>
+        <h4>User Info</h4>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -26,9 +26,10 @@
     </div>
     <div class="mt-5" th:if="${error != null}">
         <ul>
-            <li th:text="'Error: ' +${error}"></li>
+            <li th:text="'Error: ' + ${error}"></li>
         </ul>
     </div>
 </div>
+
 
 <div th:replace="footer"></div>
